@@ -1,0 +1,101 @@
+<script src="assets/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: start;
+        background-color: #f4f4f4;
+        padding: 0;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      h2 {
+        color: #444;
+      }
+
+      /* Gaya container soal */
+      #soalContainer {
+        background-color: #fff;
+        border: 2px solid #ddd;
+        padding: 20px;
+        border-radius: 18px;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Gaya setiap soal */
+      #soalContainer div {
+        margin-top: 20px;
+      }
+
+      /* Gaya opsi jawaban radio button */
+      input[type="radio"] {
+        margin-right: 5px;
+      }
+
+      /* Gaya opsi jawaban yang dipilih */
+      input[type="radio"]:checked + label {
+        font-weight: bold;
+        color: #007bff;
+      }
+
+      /* Gaya tombol Kirim Hasil Tes */
+      #kirimHasilTes {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+
+      #kirimHasilTes:hover {
+        background-color: #0056b3;
+      }
+
+      
+      input[type="radio"] {
+        margin-right: 5px;
+      }
+
+      
+      input[type="radio"]:checked + label {
+        font-weight: bold;
+        color: #007bff;
+      }
+
+    </style>
+  
+  <div id="soalContainer" class="container">
+        <h1>Selamat datang, <span id="namaPengguna"></span>!</h1>
+        <h2>Daftar Soal:</h2>
+      <div>
+        <p><strong>Soal 1:</strong> Apa warna langit di siang hari?</p>
+        <input type="radio" id="jawabanA"  name="jawabanA" value="A" /> A. Biru <input type="radio" id="jawabanA"  name="jawabanA" value="B" /> B. Merah <input type="radio" id="jawabanA"  name="jawabanA" value="C" /> C. Hijau
+      </div>
+      <div>
+        <p><strong>Soal 2:</strong> Berapa jumlah kaki yang dimiliki manusia?</p>
+        <input type="radio" id="jawabanB" name="jawabanB" value="A" /> A. 2 <input type="radio" id="jawabanB" name="jawabanB" value="B" /> B. 4 <input type="radio" id="jawabanB" name="jawabanB" value="C" /> C. 6
+      </div>
+      <div>
+        <p><strong>Soal 3:</strong> Apa bentuk bulan?</p>
+        <input type="radio" id="jawabanC" name="jawabanC" value="A" /> A. Bulat <input type="radio" id="jawabanC" name="jawabanC" value="B" /> B. Persegi <input type="radio" id="jawabanC" name="jawabanC" value="C" /> C. Segitiga
+      </div>
+      <div>
+        <p><strong>Soal 4:</strong> orang yang menderita penyakit rabun jauh bisa di atasi dengan kacamata dengan tipe? </p>
+        <input type="radio" id="jawabanD" name="jawabanD" value="A" /> A. Cembung <input type="radio" id="jawabanD" name="jawabanD" value="B" /> B. Cekung <input type="radio" id="jawabanD" name="jawabanD" value="C" /> C. Oneway
+      </div>
+      <div>
+        <p><strong>Soal 5:</strong> titik utama yang dipakai dalam jam dunia berada di? </p>
+        <input type="radio" id="jawabanE" name="jawabanE" value="A" /> A. Brazil <input type="radio" id="jawabanE" name="jawabanE" value="B" /> B. Greenwicth <input type="radio" id="jawabanE" name="jawabanE" value="C" /> C. America
+      </div>
+    <button id="kirimHasilTes" onclick="kirim()" class="btn btn-primary" disabled>Kirim Hasil Tes</button>
+    </div>
+    <script src="assets/tes.js"></script>
+   
+

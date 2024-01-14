@@ -1,0 +1,135 @@
+<div class="container">
+    <h1 >Nilai</h1>
+    <div class="ctrl" style="display: flex;gap: 3rem;">
+        <div class="pilihsemester d-flex " style="height: 5rem;display: flex;align-items: center;padding: 1rem;gap: 15px;">
+            <b>semester :</b>
+            <button id="btnsmstr1" class="btn btn-danger btnplhklsActive" style="background-color: #f6a810;border:none;" onclick="plhsmstr('1')">1</button>
+            <button id="btnsmstr2" class="btn btn-danger" style="background-color: #f6d410;border:none;" onclick="plhsmstr('2')">2</button>
+        </div>
+        <div class="pilihkelas" id="pilihKelas" style="height: 5rem;display: flex;align-items: center;padding: 1rem;gap: 15px;">
+            <b>Kelas :</b>
+            <button id="btnplhkls1" class="btn btn-danger btnplhklsActive" style="background-color: #02969c;border:none;" onclick="KelasPlh('1')">1</button>
+            <button id="btnplhkls2" class="btn btn-danger" style="background-color: #01b5bb;border:none;"onclick="KelasPlh('2')">2</button>
+            <button id="btnplhkls3" class="btn btn-danger" style="background-color: #00c5cc;border:none;"onclick="KelasPlh('3')">3</button>
+        </div>
+    </div>
+    <div class="container" id="kelas">
+        <table class="table table-striped table-bordered" style="background-color: #fff;">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">nisn</th>
+                  <th scope="col">nama</th>
+                  <th scope="col">kelas</th>
+                  <th scope="col">aksi</th>
+                </tr>
+            </thead>
+            <tbody id="dataSiswa">
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container containerForm" id="containerForm" style="border-radius: 5px; height: 40rem;width: 50rem;background-color: #fff; display: none;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+    <form id="raporForm">
+        <b style="font-size: 1.5rem;">Input Nilai</b>
+
+        <div class="mb-3">
+            <label for="mapel" class="form-label">Mata Pelajaran</label>
+            <div class="d-flex align-items-center">
+                <select class="form-select" id="mapel" name="mapel" required>
+                    <option value="-" disabled selected>Pilih mata pelajaran</option>
+                    <option value="matematika">Matematika</option>
+                    <option value="bahasa-indonesia">Bahasa Indonesia</option>
+                    <option value="bahasa-inggris">Bahasa Inggris</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiTugas1" class="form-label">Nilai Tugas 1</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiTugas1" name="nilaiTugas1" placeholder="Masukkan nilai siswa" required value="0";>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiTugas2" class="form-label">Nilai Tugas 2</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiTugas2" name="nilaiTugas2" placeholder="Masukkan nilai siswa" required value="0";>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiUjian" class="form-label">Nilai Ujian Tengah Semester</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiUts" name="nilaiUts" placeholder="Masukkan nilai siswa" required value="0";>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiUjian" class="form-label">Nilai Ujian Akhir Semester</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiUas" name="nilaiUas" placeholder="Masukkan nilai siswa" required value="0";>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="komentar" class="form-label">Komentar Guru</label>
+            <div class="d-flex align-items-center">
+                <textarea class="form-control" id="komentar" name="komentar" rows="3" placeholder="Masukkan komentar guru" ></textarea>
+            </div>
+        </div>
+        <div class="d_flex">
+            <button type="submit" class="btn btn-danger" onclick="hideForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" onclick="hideForm()">Submit</button>
+
+        </div>
+    </form>
+    
+</div>
+<script>
+    let arraySiswa =[
+        { nama: "Budi", nisn: "02737012", kelas: "1" },
+        { nama: "Kemal", nisn: "44444444", kelas: "1" },
+        { nama: "Hadi", nisn: "77777777", kelas: "1" },
+        { nama: "Fira", nisn: "87654321", kelas: "2" },
+        { nama: "Eka", nisn: "12345678", kelas: "2" },
+        { nama: "Joko", nisn: "11111111", kelas: "2" },
+        { nama: "Ivan", nisn: "99999999", kelas: "3" },
+        { nama: "Gita", nisn: "55555555", kelas: "3" },
+        { nama: "Dito", nisn: "912846026", kelas: "3" },
+    ];
+    let arraySiswaKelas =[];
+    let Kelas = "1";
+    function KelasPlh(no){
+        Kelas = no;
+        if(no == "1"){
+            $("#btnplhkls1").addClass("btnplhklsActive")
+            $("#btnplhkls2").removeClass("btnplhklsActive")
+            $("#btnplhkls3").removeClass("btnplhklsActive")
+        }else if(no == "2"){
+            $("#btnplhkls2").addClass("btnplhklsActive")
+            $("#btnplhkls1").removeClass("btnplhklsActive")
+            $("#btnplhkls3").removeClass("btnplhklsActive")
+        }else{
+            $("#btnplhkls3").addClass("btnplhklsActive")
+            $("#btnplhkls2").removeClass("btnplhklsActive")
+            $("#btnplhkls1").removeClass("btnplhklsActive")
+        }
+    }
+    console.log(Kelas)
+    for(i=0;i<arraySiswa.length;i++){
+        if (arraySiswa[i].kelas === Kelas){
+            arraySiswaKelas.push(arraySiswa[i])
+        }
+    }
+    let no = 1;
+    let tbodyDataSiswa = "";
+    for (let x = 0; x < arraySiswaKelas.length; x++) {
+        tbodyDataSiswa += "<tr>";
+        tbodyDataSiswa += "<th>" + no + "</th>";
+        tbodyDataSiswa += "<td>" + arraySiswaKelas[x].nisn + "</td>";
+        tbodyDataSiswa += "<td>" + arraySiswaKelas[x].nama + "</td>";
+        tbodyDataSiswa += "<td>" + arraySiswaKelas[x].kelas + "</td>";
+        tbodyDataSiswa += '<td><a id="beriNilai" class="btn btn-success" onclick="showForm()">beri nilai</a></td>'
+        tbodyDataSiswa += "</tr>";
+        no++;
+    }
+    document.getElementById("dataSiswa").innerHTML = tbodyDataSiswa;
+</script>

@@ -1,0 +1,65 @@
+<div class="container" id="kelas">
+    <div class="formNilai" id="formNilai" style="display: none; background-color: #14213d;color: #f6a810; padding: 15px;border-radius: 5px;margin-top: 10px;">
+        <form action="">
+            <div class="tanggal">
+                <b>Penilaian Hari Ini</b>
+                <div class="mb-3">
+                    <label for="tanggal" class="form-label"><b>Tanggal</b></label>
+                    <input type="date" class="form-control" id="tanggal" style="font-size: 20px;">
+                </div>
+            </div>
+            <div class="mb-3">
+                <b>Nama Siswa : </b><br>
+                <b>Nisn : </b>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"><b>Penilaian Akademik :</b></label><br>
+                <select name="" id="" style="width: 100%;height: 2rem;border-radius: 5px;">
+                    <option value="">Pilih Option</option>
+                    <option value="">Tugas</option>
+                    <option value="">Pekerjaan Rumah</option>
+                    <option value="">Ulangan Harian</option>
+                    <option value="">Ujian Tengah Semester</option>
+                </select>
+                <label for="exampleFormControlInput1" class="form-label mt-3" ><b>Nilai :</b></label>
+                <input type="text" style="width: 96%;background-color: #fff;" placeholder="0-100">
+            </div>
+            
+            <div class="mb-3">
+               <b>Kehadiran</b>
+               <div class="d-flex" style="justify-content: start;align-items: center;gap: 30px;">
+                <div class="alpha">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        A
+                    </label>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                </div>
+                <div class="sakit">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        S
+                    </label>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                </div>
+                <div class="izin">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        I
+                    </label>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                </div>
+            </div>
+            <div class="Sikap">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"><b>Sikap dan Perilaku :</b></label>
+                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="0-100">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"><b>Note Guru</b></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="action" style="display: flex;justify-content: space-between;">
+                <button class="btn btn-danger" onclick="hideForm()">Cancel</button>
+                <button class="btn btn-success" onclick="hideForm()">Submit</button>
+            </div>
+        </form>
+    </div>

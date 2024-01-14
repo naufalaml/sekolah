@@ -1,0 +1,82 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="" class="form-label">NIS</label>
+        <select onchange="cek_siswa(this)" class="form-control form-select" name="" id="nis">
+          <option value="pilih">Pilih NIS</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="" class="form-label">Jenis Pembayaran</label>
+        <select class="form-control form-select" name="" id="jenis">
+          <option value="">Pilih Jenis Pembayaran</option>
+          <option value="Registrasi">Registrasi</option>
+          <option value="SPP Bulanan">SPP Bulanan</option>
+          <option value="Lain-lain">Lain-lain</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Jumlah Bayar</label>
+        <input type="number" name="" id="jumlah" class="form-control" placeholder="" aria-describedby="helpId" />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Keterangan</label>
+        <input type="text" name="" id="keterangan" value="Lunas" class="form-control" placeholder="" aria-describedby="helpId" />
+      </div>
+      <div class="mb-3">
+        <button onclick="bayar()" class="btn btn-primary">Simpan Pembayaran</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $.ajax({
+    type: "GET",
+    url: "https://informatikaunwaha.com/tugasapi/holis/api_get.php",
+    data: {
+      query: "SELECT * FROM siswa",
+    },
+    dataType: "json",
+    success: function (response) {
+      var datasiswa = response;
+
+      $.each(datasiswa, function (indx, vale) {
+        $(`#nis`).append(`
+                 <option value="${vale.nisn}">${vale.nisn} - ${vale.nama}</option>
+
+                 `);
+      });
+    },
+  });
+
+  function cek_siswa(els) {
+    $("#nama").val($(els).val());
+  }
+
+  function bayar() {
+    var arrayBayar = {
+      nis: $("#nis").val(),
+      jumlah: $("#jumlah").val(),
+      jenis: $("#jenis").val(),
+      keterangan: $("#keterangan").val(),
+    };
+
+    if ((arrayBayar.jumlah == "") | (arrayBayar.keterangan == "")) {
+      alert("Tidak Boleh Aada Yang Kosong");
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "https://informatikaunwaha.com/tugasapi/holis/apipost.php",
+        data: arrayBayar,
+        dataType: "json",
+        success: function (response) {
+          alert(response);
+          $("#jumlah").val("");
+        },
+      });
+    }
+  }
+</script>

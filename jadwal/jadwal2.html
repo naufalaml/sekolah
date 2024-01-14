@@ -1,0 +1,385 @@
+<title>Jadwal Mata Pelajaran</title>
+<style>
+    body {
+        width: 100%;
+    }
+
+    table {
+        /* background-color: blue;
+            color: aqua; */
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px;
+    }
+
+    th,
+    td {
+        background-color: rgb(0, 47, 112);
+        color: rgb(205, 192, 12);
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #000;
+    }
+
+    form {
+        margin: 20px;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tabeljadwal">
+            <h1>Jadwal Mata Pelajaran Kelas 2</h1>
+            <table id="tablejadwal">
+                <button class="btn btn-lg btn-secondary mb-2" onclick="synclocal()">Sync</button>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;text-align: center;">#</th>
+                        <th style="width: 10%;text-align: center;">Hari</th>
+                        <th style="width: 30%;text-align: center;">Jam</th>
+                        <th style="width: 20%;text-align: center;">Mata Pelajaran</th>
+                        <th style="width: 15%;text-align: center;">Guru</th>
+                        <th style="width: 5%;text-align: center;">Kelas</th>
+                        <th style="width: 15%;text-align: center;">aksi</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <table id="tableguru">
+                <h1>Tabel Guru
+                    <hr> <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalformguru">Tambah</button>
+                </h1>
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">#</th>
+                        <th style="text-align: center;">Kode</th>
+                        <th style="text-align: center;">Nama</th>
+                        <!-- <th style="text-align: center;">Bidang</th> -->
+                        <th style="text-align: center;">Alamat</th>
+                        <th style="text-align: center;">Email</th>
+                        <th style="text-align: center;">Telephone</th>
+                        <th style="text-align: center;">Jenis Kelamin</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalubahjadwal" tabindex="-1" aria-labelledby="modalubahjadwalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titlemodalubahjadwal"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" style="display: none;" name="" id="hari">
+                    <input type="text" style="display: none;" name="" id="jamMulai">
+                    <input type="text" style="display: none;" name="" id="jamSelesai">
+                    <input type="text" style="display: none;" name="" id="kelas">
+                    <input type="text" style="display: none;" name="" id="id">
+                    <label for="mataPelajaran">Mata Pelajaran:</label>
+                    <select style="width: 70%;float: right;border-radius: 4px;padding: 5px;" name="mataPelajaran"
+                        onchange="filterSelect()" id="formmatapelajaran">
+                        <option value="">Pilih Pelajaran</option>
+                        <option value="MATEMATIKA">MATEMATIKA</option>
+                        <option value="BAHASA INDONESIA">Bahasa Indonesia</option>
+                        <option value="IPA">IPA</option>
+                        <option value="BAHASA INGGRIS">Bahasa Inggris</option>
+                        <option value="SENI BUDAYA">Seni Budaya</option>
+                        <option value="PENDIDIKA JASMANI">Pendidikan Jasmani</option>
+                        <option value="SEJARAH">Sejarah</option>
+                        <option value="FISIKA">Fisika</option>
+                        <option value="KIMIA">Kimia</option>
+                        <option value="GEOGRAFI">Geografi</option>
+                    </select>
+                    <hr>
+                    <label for="">Pilih Guru:</label>
+                    <select style="width: 70%;float: right;border-radius: 4px;padding: 5px;" name="" id="pilihkodeGuru">
+                        <option value="">Pilih Guru</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btnUpdate" class="btn btn-primary" data-bs-dismiss="modal">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalformguru" tabindex="-1" aria-labelledby="modalformguruLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalformguru">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if (typeof tableguru === "undefined") {
+            let tableguru
+            let tablejadwal
+        }
+        tableguru = new DataTable('#tableguru', {
+            // options
+        });
+        tablejadwal = new DataTable('#tablejadwal', {
+            "pageLength": 15
+        });
+        readapiguru();
+        readapijadwal();
+        function readapiguru() {
+            let url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apiguru.php/"
+            $.getJSON(url, { fungsi: "READ" }, function (result) {
+                if (result !== 0) {
+                    tableguru.clear().draw();
+                    $.each(result, function (i, kolom) {
+                        let index = i + 1;
+                        let kodeGuru = kolom.kodeGuru;
+                        let nama = kolom.nama;
+                        let Alamat = kolom.alamat;
+                        let email = kolom.email;
+                        let Telphone = kolom.Telphone;
+                        let jenisKelamin = kolom.jenisKelamin;
+                        tableguru.row.add([index, kodeGuru, nama, Alamat, email, Telphone, jenisKelamin]).draw()
+                    })
+                }
+            })
+        }
+        function isimodalubahjadwal() {
+            let url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apiguru.php/"
+            $.getJSON(url, { fungsi: "READ" }, function (result) {
+                if (result !== 0) {
+                    let pilihkodeGuru = document.getElementById("pilihkodeGuru")
+                    pilihkodeGuru.innerHTML = '<option value="">Pilih Guru</option>'
+                    $.each(result, function (i, kolom) {
+                        pilihkodeGuru.innerHTML += "<option value='" + kolom.kodeGuru + "'>" + kolom.nama + " ( " + kolom.mataPelajaran + " ) " + "</option>"
+                    })
+                }
+            })
+        }
+        function filterSelect() {
+            // Mendapatkan elemen select dan filter
+            var selectFilter = document.getElementById("formmatapelajaran");
+            var mySelect = document.getElementById("pilihkodeGuru");
+            var options = mySelect.options;
+            var filter = selectFilter.value.toLowerCase();
+
+            // Loop melalui semua opsi dan menyembunyikan yang tidak sesuai
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var optionText = option.text.toLowerCase();
+
+                if (filter === "" || optionText.indexOf(filter) > -1) {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+        }
+        function readapijadwal() {
+            let url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apijadwal.php/"
+            $.getJSON(url, { fungsi: "FILTERKELAS", kelas: 2 }, function (result) {
+                if (result !== 0) {
+                    tablejadwal.clear().draw();
+                    $.each(result, function (i, kolom) {
+                        let index = i + 1;
+                        let id = kolom.id;
+                        let hari = kolom.hari;
+                        let jamMulai = kolom.jamMulai;
+                        let jamSelesai = kolom.jamSelesai;
+                        let mataPelajaran = kolom.mataPelajaran;
+                        let kodeGuru = kolom.kodeGuru;
+                        let kelas = kolom.kelas;
+                        let btn = '<button id="btnUbah" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalubahjadwal" onclick="isimodalubahjadwal();bringdatajdwalmodal(' + id + ',\'' + hari + '\'); cekKoneksi();">Ubah</button>';
+                        tablejadwal.row.add([index, hari, jamMulai + " - " + jamSelesai, mataPelajaran, kodeGuru, kelas, btn]).draw()
+                    })
+                }
+            })
+        }
+        function bringdatajdwalmodal(id, hari) {
+            // console.log("test")
+            let formhari = $("#hari");
+            let jamMulai = $("#jamMulai");
+            let jamSelesai = $("#jamSelesai");
+            let kelas = $("#kelas");
+            let formid = $("#id");
+            let mataPelajaran = $("#formmatapelajaran");
+            let kodeGuru = $("#pilihkodeGuru");
+            let titlemodalubahjadwal = $("#titlemodalubahjadwal").html(hari);
+            // console.log(kodeGuru.value)
+            let url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apijadwal.php/";
+
+            $.getJSON(url, { fungsi: "FILTER", id: id }, function (result) {
+                $.each(result, function (i, kolom) {
+                    formhari.val(kolom.hari);
+                    jamMulai.val(kolom.jamMulai);
+                    jamSelesai.val(kolom.jamSelesai);
+                    kelas.val(kolom.kelas);
+                    formid.val(kolom.id);
+                    mataPelajaran.val(kolom.mataPelajaran);
+                    // console.log(kolom.mataPelajaran)
+                    kodeGuru.val(kolom.kodeGuru);
+                })
+
+            });
+        }
+        function updatejadwal() {
+            let formhari = $("#hari").val();
+            let jamMulai = $("#jamMulai").val();
+            let jamSelesai = $("#jamSelesai").val();
+            let kelas = $("#kelas").val();
+            let formid = $("#id").val();
+            let mataPelajaran = $("#formmatapelajaran").val();
+            let kodeGuru = $("#pilihkodeGuru").val();
+            let dataToInsert = {
+                hari: formhari,
+                jamMulai: jamMulai,
+                jamSelesai: jamSelesai,
+                kelas: kelas,
+                id: formid,
+                mataPelajaran: mataPelajaran,
+                kodeGuru: kodeGuru,
+            }
+            // console.log(dataToInsert)
+            let url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apijadwal.php/";
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { fungsi: "UPDATE", ...dataToInsert },
+                success: function (response) {
+                    alert(JSON.stringify(response.msg))
+                    readapijadwal();
+                }, error: function (error) {
+                    alert("error")
+                }
+            })
+        }
+
+
+        // Fungsi untuk memeriksa status koneksi internet
+        function cekKoneksi() {
+            // Periksa apakah pengguna online
+            if (navigator.onLine) {
+                // Jika online, bind fungsi "updatejadwal" pada event "onclick" dari tombol "btnUpdate"
+                $("#btnUpdate").off("click")
+                $("#btnUpdate").on("click", function () {
+                    updatejadwal();
+                });
+            } else {
+                // Jika offline, bind fungsi "saveToLocalstorageJadwal" pada event "onclick" dari tombol "btnUpdate"
+                $("#btnUpdate").off("click")
+                $("#btnUpdate").on("click", function () {
+                    saveToLocalstorageJadwal();
+                });
+            }
+        }
+
+        // Fungsi untuk menyimpan data ke local storage
+        function saveToLocalstorageJadwal() {
+            // Ambil nilai dari input formulir
+            let formhari = $("#hari").val();
+            let jamMulai = $("#jamMulai").val();
+            let jamSelesai = $("#jamSelesai").val();
+            let kelas = $("#kelas").val();
+            let formid = $("#id").val();
+            let mataPelajaran = $("#formmatapelajaran").val();
+            let kodeGuru = $("#pilihkodeGuru").val();
+
+            // Buat objek dengan nilai yang diambil
+            let dataToInsert = {
+                hari: formhari,
+                jamMulai: jamMulai,
+                jamSelesai: jamSelesai,
+                kelas: kelas,
+                id: formid,
+                mataPelajaran: mataPelajaran,
+                kodeGuru: kodeGuru,
+            }
+
+            // Konversi objek menjadi string JSON
+            var dataJson = JSON.stringify(dataToInsert);
+
+            // Simpan string JSON ke local storage dengan kunci tertentu
+            localStorage.setItem("jadwal_" + formhari + "_" + formid, dataJson);
+
+            // Tampilkan peringatan bahwa data telah disimpan
+            alert("Data disimpan");
+        }
+
+        // Fungsi untuk menyinkronkan data local storage dengan server
+        function synclocal() {
+            // Dapatkan semua kunci dari local storage
+            var allKeys = Object.keys(localStorage);
+            let dataToInsert;
+
+            // Iterasi melalui semua kunci di local storage
+            allKeys.forEach(function (key) {
+                // Periksa apakah kunci mengandung "jadwal_"
+                if (key.includes("jadwal_")) {
+                    // Parse data JSON dari local storage
+                    var datalokal = JSON.parse(localStorage.getItem(key));
+
+                    // Persiapkan data untuk dikirim ke server
+                    dataToInsert = {
+                        hari: datalokal.hari,
+                        jamMulai: datalokal.jamMulai,
+                        jamSelesai: datalokal.jamSelesai,
+                        kelas: datalokal.kelas,
+                        id: datalokal.id,
+                        mataPelajaran: datalokal.mataPelajaran,
+                        kodeGuru: datalokal.kodeGuru,
+                    };
+
+                    // Unggah data ke server dan hapus dari local storage
+                    uploadtoserver(dataToInsert, key);
+                }
+            });
+        }
+
+        // Fungsi untuk mengunggah data ke server
+        function uploadtoserver(dataToInsert, key) {
+            // console.log(dataToInsert);
+
+            // Periksa apakah dataToInsert bukan 0 (Saya anggap pemeriksaan ini dimaksudkan untuk memverifikasi data)
+            if (dataToInsert !== 0) {
+                var url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apijadwal.php/";
+
+                // Kirim permintaan AJAX ke server untuk memperbarui data
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: { fungsi: "UPDATE", ...dataToInsert },
+                    success: function (response) {
+                        alert("Berhasil");
+                        // Setelah pengunggahan berhasil, hapus data dari local storage
+                        localStorage.removeItem(key);
+                        //panggil lagi fungsi read api agar tidak perlu referesh untuk melihat perubahan
+                        readapijadwal()
+                    },
+                    error: function (error) {
+                        alert("Error");
+                    }
+                });
+            }
+        }
+
+    </script>

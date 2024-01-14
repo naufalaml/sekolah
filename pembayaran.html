@@ -1,0 +1,109 @@
+<script src="assets/print.min.js"></script>
+<style>
+    .invoice {
+        border: 1px solid #ccc;
+        padding: 20px;
+        width: 600px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+    }
+
+    .letterhead {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .letterhead img {
+        max-width: 150px;
+        margin-bottom: 10px;
+    }
+
+    .invoice-header {
+        text-align: center;
+    }
+
+    .invoice-body {
+        margin-top: 20px;
+    }
+
+    .invoice-details {
+        margin-bottom: 20px;
+    }
+
+    .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .invoice-total {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    #printini {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+</style>
+<button onClick="printJS({ printable: 'printini', type: 'html', targetStyles: ['*']})">
+    Print
+</button>
+<div id="printini">
+
+    <div class="invoice">
+        <div class="letterhead">
+            <img src="assets/img/ok.png" alt="Logo Sekolah">
+            <h2>Nama Sekolah</h2>
+            <p>Alamat Sekolah</p>
+        </div>
+        <div class="invoice-header">
+            <h2>Invoice Pendaftaran Sekolah</h2>
+        </div>
+        <div class="invoice-body">
+            <div class="invoice-details">
+                <p><strong>Nama:</strong><span id="namaset"> John Doe</p></span>
+                <p><strong>Email:</strong><span id="emailset"> aku@gmail.com</p></span>
+                <p><strong>Nomor Pendaftaran:</strong> zVVbx1221</p>
+                <p><strong>Tanggal Pendaftaran:</strong> 28 Desember 2023</p>
+            </div>
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Deskripsi</th>
+                        <th>Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Biaya Pendaftaran</td>
+                        <td>Rp.2.500.000</td>
+                    </tr>
+                    <tr>
+                        <td>Biaya Buku</td>
+                        <td>Rp.35.000</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="invoice-total">
+                <p><strong>Total:2.535.000</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var pendaftaranData = JSON.parse(localStorage.getItem("pendaftaranData"));
+    document.getElementById("namaset").textContent = pendaftaranData.username;
+    document.getElementById("emailset").textContent = pendaftaranData.email;
+</script>

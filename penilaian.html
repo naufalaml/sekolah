@@ -1,0 +1,96 @@
+<div class="container">
+    <h1 >Nilai</h1>
+    <div class="ctrl">
+        <div class="pilihsemester d-flex">
+            <b>semester :</b>
+            <select class="form-select" style="width: 1.5rem;" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+        </div>
+    </div>
+    <div class="c1">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">nisn</th>
+                  <th scope="col">nama</th>
+                  <th scope="col">kelas</th>
+                  <th scope="col">aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>00000000</td>
+                  <td>Mark Otto</td>
+                  <td>1</td>
+                  <td><a id="beriNilai" class="btn btn-success" onclick="showForm()">beri nilai</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container containerForm" id="containerForm" style="border-radius: 5px; height: 40rem;width: 50rem;background-color: #fff; display: none;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+    <form id="raporForm">
+        <b style="font-size: 1.5rem;">Input Nilai</b>
+
+        <div class="mb-3">
+            <label for="mapel" class="form-label">Mata Pelajaran</label>
+            <div class="d-flex align-items-center">
+                <select class="form-select" id="mapel" name="mapel" required>
+                    <option value="" disabled selected>Pilih mata pelajaran</option>
+                    <option value="matematika">Matematika</option>
+                    <option value="bahasa-indonesia">Bahasa Indonesia</option>
+                    <option value="bahasa-inggris">Bahasa Inggris</option>
+                    <!-- Tambahkan pilihan mata pelajaran lainnya di sini -->
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiTugas1" class="form-label">Nilai Tugas 1</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiTugas1" name="nilaiTugas1" placeholder="Masukkan nilai siswa" required>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiTugas2" class="form-label">Nilai Tugas 2</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiTugas2" name="nilaiTugas2" placeholder="Masukkan nilai siswa" required>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="nilaiUjian" class="form-label">Nilai Ujian</label>
+            <div class="d-flex align-items-center">
+                <input type="number" class="form-control" id="nilaiUjian" name="nilaiUjian" placeholder="Masukkan nilai siswa" required>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="keaktifan" class="form-label">Keaktifan</label>
+            <div class="d-flex align-items-center">
+                <label for="izin" class="form-label">Izin</label>
+                <input type="number" class="form-control" id="izin" name="izin" placeholder="Jumlah izin" required>
+                
+                <label for="sakit" class="form-label">Sakit</label>
+                <input type="number" class="form-control" id="sakit" name="sakit" placeholder="Jumlah sakit" required>
+                
+                <label for="alpha" class="form-label">Alpha</label>
+                <input type="number" class="form-control" id="alpha" name="alpha" placeholder="Jumlah alpha" required>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="komentar" class="form-label">Komentar Guru</label>
+            <div class="d-flex align-items-center">
+                <textarea class="form-control" id="komentar" name="komentar" rows="3" placeholder="Masukkan komentar guru" required></textarea>
+            </div>
+        </div>
+        <div class="d_flex">
+            <button type="submit" class="btn btn-danger" onclick="hideForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" onclick="hideForm()">Submit</button>
+        </div>
+    </form>
+    
+</div>

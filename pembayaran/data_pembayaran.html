@@ -1,0 +1,105 @@
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="" class="form-label">NIS</label>
+          <input type="text" name="" id="nis" value="" class="form-control" placeholder="" aria-describedby="helpId" />
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Jenis Pembayaran</label>
+          <select class="form-control form-select" name="" id="jenis">
+            <option value="">Pilih Jenis Pembayaran</option>
+            <option value="Registrasi">Registrasi</option>
+            <option value="SPP Bulanan">SPP Bulanan</option>
+            <option value="Lain-lain">Lain-lain</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Jumlah Bayar</label>
+          <input type="number" name="" id="jumlah" class="form-control" placeholder="" aria-describedby="helpId" />
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Keterangan</label>
+          <input type="text" name="" id="keterangan" value="Lunas" class="form-control" placeholder="" aria-describedby="helpId" />
+        </div>
+        <div class="mb-3">
+          <button onclick="bayar()" class="btn btn-success float-end">Update Pembayaran</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <th>No</th>
+          <th>Tanggal</th>
+          <th>NIS</th>
+          <th>Nama</th>
+          <th>Jenis Pembayaran</th>
+          <th>Jumlah</th>
+          <th>Keterangan</th>
+          <th>Opsi</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  $.ajax({
+    type: "GET",
+    url: "https://informatikaunwaha.com/tugasapi/holis/api_get.php",
+    data: {
+      query: "SELECT * FROM f_bayar JOIN siswa ON f_bayar.nisn= siswa.nisn",
+    },
+    dataType: "json",
+    success: function (response) {
+      var datasiswa = response;
+
+      $.each(datasiswa, function (indx, vale) {
+        $(`tbody`).append(`
+            <tr>
+            <td>${indx + 1}</td>
+            <td>${vale.tanggal}</td>
+            <td>${vale.nisn}</td>
+            <td>${vale.nama}</td>
+            <td>${vale.jenis}</td>
+            <td>${vale.jumlah}</td>
+            <td>${vale.keterangan}</td>
+            <td>
+            
+                <button data-keterangan="${vale.keterangan}" data-nis="${vale.nis}" data-jenis="${vale.jenis}" data-jumlah="${vale.jumlah}" class='btn btn-sm btn-warning' onclick="edit(this)">Edit</button>
+                <button class='btn btn-sm btn-danger' onclick="hapus(this)">Hapus</button>
+                
+            </td>
+            </tr>
+        `);
+      });
+    },
+  });
+</script>
+
+<script>
+  function edit(el) {
+    $("#modalId").modal("show");
+
+    $("#nis").val($(el).attr("data-nis"));
+    $("#jumlah").val($(el).attr("data-jumlah"));
+    $("#jenis").val($(el).attr("data-jenis"));
+    $("#keterangan").val($(el).attr("data-ketarangan"));
+  }
+</script>
