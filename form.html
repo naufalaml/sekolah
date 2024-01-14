@@ -1,138 +1,128 @@
-<!DOCTYPE html>
-<html>
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <head>
-    <title>Formulir Pendaftaran Siswa Baru</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-      }
+<title>Formulir Pendaftaran Siswa Baru</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
 
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-      }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
 
-      h1 {
-        text-align: center;
-      }
+  h1 {
+    text-align: center;
+  }
 
-      label,
-      input,
-      select,
-      textarea {
-        display: block;
-        margin-bottom: 5px;
-      }
-       label {
-            display: block;
-        }
-      .d-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-      .d-flex label {
-            flex: 1;
-        }
-      .d-flex input[type="radio"] {
-        flex: 1;
-      }
-      input[type="text"],
-      input[type="email"],
-      input[type="tel"],
-      textarea {
-        width: 100%;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+  label,
+  input,
+  select,
+  textarea {
+    display: block;
+    margin-bottom: 5px;
+  }
+  label {
+    display: block;
+  }
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .d-flex label {
+    flex: 1;
+  }
+  .d-flex input[type="radio"] {
+    flex: 1;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
-      select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 20px;
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
 
-      }
+  input[type="radio"] {
+    margin-right: 15px;
+    margin-top: 8px;
+  }
 
-      input[type="radio"] {
-        margin-right: 15px;
-        margin-top: 8px;
-      }
+  button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-      button {
-        background: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+  button:hover {
+    background: #0056b3;
+  }
+</style>
 
-      button:hover {
-        background: #0056b3;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Formulir Pendaftaran Siswa Baru</h1>
-      <form id="registrationForm" action="" method="post">
-        <label for="nama">Nama Lengkap:</label>
-        <input type="text" class="form-control" name="nama" id="nama" required />
+<div class="container mt-4">
+  <h1>Formulir Pendaftaran Siswa Baru</h1>
+  <form id="registrationForm" action="" method="post">
+    <label for="nama">Nama Lengkap:</label>
+    <input type="text" class="form-control" name="nama" id="nama" required />
 
-        <!-- <label>Jenis Kelamin:</label>
+    <!-- <label>Jenis Kelamin:</label>
             <input type="radio" name="jenis_kelamin" value="Laki-laki" required> Laki-laki
             <input type="radio" name="jenis_kelamin" value="Perempuan" required> Perempuan -->
-        <!-- <div class="d-flex">
+    <!-- <div class="d-flex">
               <label>Jenis Kelamin: </label>
               <label><input type="radio" class="form-control" name="jenis_kelamin" id="laki-laki" value="Laki-laki" required/>Laki-laki </label>
             </div>
             <div class="d-flex">
               <label><input type="radio" class="form-control" name="jenis_kelamin" id="perempuan" value="Perempuan" required/>Perempuan</label>
             </div> -->
-        <div class="d-flex">
-          <label>Jenis Kelamin:</label>
-          <label><input type="radio" name="jenis_kelamin" id="laki-laki" value="Laki-laki" required />Laki-laki</label>
-          <label><input type="radio" name="jenis_kelamin" id="perempuan" value="Perempuan" required />Perempuan</label>
-        </div>
-        <label for="tanggal_lahir">Tanggal Lahir:</label>
-        <input type="date" class="form-control" name="tanggal_lahir" required />
-
-        <label for="nama_orang_tua">Nama Orang Tua:</label>
-        <input type="text" class="form-control" name="nama_orang_tua" id="nama_orang_tua" required />
-
-        <label for="alamat">Alamat:</label>
-        <textarea name="alamat" rows="4" required></textarea>
-
-        <label for="email">Alamat Email:</label>
-        <input type="email" class="form-control" name="email" required />
-
-        <label for="no_telepon">Nomor Telepon:</label>
-        <input type="tel" class="form-control" name="no_telepon" required />
-
-        <label for="kelas">Kelas yang Didaftar:</label>
-        <select name="kelas" required>
-          <option value="I">Kelas I</option>
-          <option value="II">Kelas II</option>
-          <option value="III">Kelas III</option>
-          <option value="IV">Kelas IV</option>
-          <option value="V">Kelas V</option>
-          <option value="VI">Kelas VI</option>
-        </select>
-        <button type="submit">Daftar</button>
-      </form>
+    <div class="d-flex">
+      <label>Jenis Kelamin:</label>
+      <label><input type="radio" name="jenis_kelamin" id="laki-laki" value="Laki-laki" required />Laki-laki</label>
+      <label><input type="radio" name="jenis_kelamin" id="perempuan" value="Perempuan" required />Perempuan</label>
     </div>
+    <label for="tanggal_lahir">Tanggal Lahir:</label>
+    <input type="date" class="form-control" name="tanggal_lahir" required />
 
-    <script>
-      
-    </script>
-  </body>
-</html>
+    <label for="nama_orang_tua">Nama Orang Tua:</label>
+    <input type="text" class="form-control" name="nama_orang_tua" id="nama_orang_tua" required />
+
+    <label for="alamat">Alamat:</label>
+    <textarea name="alamat" rows="4" required></textarea>
+
+    <label for="email">Alamat Email:</label>
+    <input type="email" class="form-control" name="email" required />
+
+    <label for="no_telepon">Nomor Telepon:</label>
+    <input type="tel" class="form-control" name="no_telepon" required />
+
+    <label for="kelas">Kelas yang Didaftar:</label>
+    <select name="kelas" required>
+      <option value="I">Kelas I</option>
+      <option value="II">Kelas II</option>
+      <option value="III">Kelas III</option>
+      <option value="IV">Kelas IV</option>
+      <option value="V">Kelas V</option>
+      <option value="VI">Kelas VI</option>
+    </select>
+    <button type="submit">Daftar</button>
+  </form>
+</div>
+
+<script></script>

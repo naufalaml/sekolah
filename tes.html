@@ -1,101 +1,125 @@
-<script src="assets/jquery-3.7.1.min.js"></script>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        text-align: start;
-        background-color: #f4f4f4;
-        padding: 0;
-      }
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-align: start;
+    background-color: #f4f4f4;
+    padding: 0;
+  }
 
-      h1 {
-        color: #333;
-      }
+  h1 {
+    color: #333;
+  }
 
-      h2 {
-        color: #444;
-      }
+  h2 {
+    color: #444;
+  }
 
-      /* Gaya container soal */
-      #soalContainer {
-        background-color: #fff;
-        border: 2px solid #ddd;
-        padding: 20px;
-        border-radius: 18px;
-        margin-top: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
+  /* Gaya container soal */
+  #soalContainer {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 18px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 
-      /* Gaya setiap soal */
-      #soalContainer div {
-        margin-top: 20px;
-      }
+  /* Gaya setiap soal */
+  #soalContainer div {
+    margin-top: 20px;
+  }
 
-      /* Gaya opsi jawaban radio button */
-      input[type="radio"] {
-        margin-right: 5px;
-      }
+  /* Gaya opsi jawaban radio button */
+  input[type="radio"] {
+    margin-right: 5px;
+  }
 
-      /* Gaya opsi jawaban yang dipilih */
-      input[type="radio"]:checked + label {
-        font-weight: bold;
-        color: #007bff;
-      }
+  /* Gaya opsi jawaban yang dipilih */
+  input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #007bff;
+  }
 
-      /* Gaya tombol Kirim Hasil Tes */
-      #kirimHasilTes {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-      }
+  /* Gaya tombol Kirim Hasil Tes */
+  #kirimHasilTes {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
 
-      #kirimHasilTes:hover {
-        background-color: #0056b3;
-      }
+  #kirimHasilTes:hover {
+    background-color: #0056b3;
+  }
 
-      
-      input[type="radio"] {
-        margin-right: 5px;
-      }
+  input[type="radio"] {
+    margin-right: 5px;
+  }
 
-      
-      input[type="radio"]:checked + label {
-        font-weight: bold;
-        color: #007bff;
-      }
+  input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #007bff;
+  }
+</style>
 
-    </style>
-  
-  <div id="soalContainer" class="container">
-        <h1>Selamat datang, <span id="namaPengguna"></span>!</h1>
-        <h2>Daftar Soal:</h2>
-      <div>
-        <p><strong>Soal 1:</strong> Apa warna langit di siang hari?</p>
-        <input type="radio" id="jawabanA"  name="jawabanA" value="A" /> A. Biru <input type="radio" id="jawabanA"  name="jawabanA" value="B" /> B. Merah <input type="radio" id="jawabanA"  name="jawabanA" value="C" /> C. Hijau
+<!-- Modal -->
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div>
-        <p><strong>Soal 2:</strong> Berapa jumlah kaki yang dimiliki manusia?</p>
-        <input type="radio" id="jawabanB" name="jawabanB" value="A" /> A. 2 <input type="radio" id="jawabanB" name="jawabanB" value="B" /> B. 4 <input type="radio" id="jawabanB" name="jawabanB" value="C" /> C. 6
+      <div class="modal-body">
+        <h3>Selamat Anda Lulus !</h3>
+        <p>Silahkan Lakukan Pembayaran Ke KTU Sekolah</p>
+        <br />
+        <p>Tunjukkan bukti lembar Registrasi ini kepada staff administrasi (KTU) Sekolah</p>
+
+        <hr />
+        <h5>Kode Registrasi :</h5>
+        <h4 id="kodereg"></h4>
+        
+        <p id="dataregis"></p>
+
+        <br />
+        <h6>Nominal Pembayaran Registrasi : Rp.100.0000</h6>
       </div>
-      <div>
-        <p><strong>Soal 3:</strong> Apa bentuk bulan?</p>
-        <input type="radio" id="jawabanC" name="jawabanC" value="A" /> A. Bulat <input type="radio" id="jawabanC" name="jawabanC" value="B" /> B. Persegi <input type="radio" id="jawabanC" name="jawabanC" value="C" /> C. Segitiga
+      <div class="modal-footer">
+        <button type="button" onclick="direk()" data-bs-dismiss="modal" class="btn btn-primary">Baik</button>
       </div>
-      <div>
-        <p><strong>Soal 4:</strong> orang yang menderita penyakit rabun jauh bisa di atasi dengan kacamata dengan tipe? </p>
-        <input type="radio" id="jawabanD" name="jawabanD" value="A" /> A. Cembung <input type="radio" id="jawabanD" name="jawabanD" value="B" /> B. Cekung <input type="radio" id="jawabanD" name="jawabanD" value="C" /> C. Oneway
-      </div>
-      <div>
-        <p><strong>Soal 5:</strong> titik utama yang dipakai dalam jam dunia berada di? </p>
-        <input type="radio" id="jawabanE" name="jawabanE" value="A" /> A. Brazil <input type="radio" id="jawabanE" name="jawabanE" value="B" /> B. Greenwicth <input type="radio" id="jawabanE" name="jawabanE" value="C" /> C. America
-      </div>
-    <button id="kirimHasilTes" onclick="kirim()" class="btn btn-primary" disabled>Kirim Hasil Tes</button>
     </div>
-    <script src="assets/tes.js"></script>
-   
+  </div>
+</div>
 
+<div id="soalContainer" class="container">
+  <h1>Selamat datang, <span id="namaPengguna"></span>!</h1>
+  <h2>Daftar Soal:</h2>
+  <div>
+    <p><strong>Soal 1:</strong> Apa warna langit di siang hari?</p>
+    <input type="radio" id="jawabanA" name="jawabanA" value="A" /> A. Biru <input type="radio" id="jawabanA" name="jawabanA" value="B" /> B. Merah <input type="radio" id="jawabanA" name="jawabanA" value="C" /> C. Hijau
+  </div>
+  <div>
+    <p><strong>Soal 2:</strong> Berapa jumlah kaki yang dimiliki manusia?</p>
+    <input type="radio" id="jawabanB" name="jawabanB" value="A" /> A. 2 <input type="radio" id="jawabanB" name="jawabanB" value="B" /> B. 4 <input type="radio" id="jawabanB" name="jawabanB" value="C" /> C. 6
+  </div>
+  <div>
+    <p><strong>Soal 3:</strong> Apa bentuk bulan?</p>
+    <input type="radio" id="jawabanC" name="jawabanC" value="A" /> A. Bulat <input type="radio" id="jawabanC" name="jawabanC" value="B" /> B. Persegi <input type="radio" id="jawabanC" name="jawabanC" value="C" /> C. Segitiga
+  </div>
+  <div>
+    <p><strong>Soal 4:</strong> orang yang menderita penyakit rabun jauh bisa di atasi dengan kacamata dengan tipe?</p>
+    <input type="radio" id="jawabanD" name="jawabanD" value="A" /> A. Cembung <input type="radio" id="jawabanD" name="jawabanD" value="B" /> B. Cekung <input type="radio" id="jawabanD" name="jawabanD" value="C" /> C. Oneway
+  </div>
+  <div>
+    <p><strong>Soal 5:</strong> titik utama yang dipakai dalam jam dunia berada di?</p>
+    <input type="radio" id="jawabanE" name="jawabanE" value="A" /> A. Brazil <input type="radio" id="jawabanE" name="jawabanE" value="B" /> B. Greenwicth <input type="radio" id="jawabanE" name="jawabanE" value="C" /> C. America
+  </div>
+  <button id="kirimHasilTes" onclick="kirim()" class="btn btn-primary" disabled>Kirim Hasil Tes</button>
+</div>
+<script src="assets/tes.js"></script>

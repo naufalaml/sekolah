@@ -1,9 +1,11 @@
-    <div class="container">
+<div class="container">
+  <div class="card">
+    <div class="card-body">
       <h2>Data Siswa</h2>
       <table class="table table-striped" id="siswaTable">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>#</th>
             <th>Nama</th>
             <th>Jenis Kelamin</th>
             <th>Tanggal Lahir</th>
@@ -18,71 +20,74 @@
         <tbody id="siswaBody"></tbody>
       </table>
     </div>
+  </div>
+</div>
 
-    <!-- Modal Edit Siswa -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Edit Siswa</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="editForm">
-              <input type="hidden" id="editId" name="id" />
-              <label for="editNama">Nama:</label>
-              <input type="text" id="editNama" name="nama" required />
-              <label for="editJenisKelamin">Jenis Kelamin:</label>
-              <select id="editJenisKelamin" name="jenis_kelamin" required>
-                <option value="L">Laki-laki</option>
-                <option value="P">Perempuan</option>
-              </select>
-              <label for="editTanggalLahir">Tanggal Lahir:</label>
-              <input type="date" id="editTanggalLahir" name="tanggal_lahir" required />
-              <label for="editNamaOrtu">Nama Orang Tua:</label>
-              <input type="text" id="editNamaOrtu" name="nama_ortu" required />
-              <label for="editAlamat">Alamat:</label>
-              <textarea id="editAlamat" name="alamat" required></textarea>
-              <label for="editEmail">Email:</label>
-              <input type="email" id="editEmail" name="email" required />
-              <label for="editNomorTlp">Nomor Telepon:</label>
-              <input type="text" id="editNomorTlp" name="nomor_tlp" required />
-              <label for="editKelas">Kelas:</label>
-              <input type="text" id="editKelas" name="kelas" required />
-              <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-            </form>
-          </div>
-        </div>
+<!-- Modal Edit Siswa -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Siswa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm">
+          <input type="hidden" id="editId" name="id" />
+          <label for="editNama">Nama:</label>
+          <input type="text" id="editNama" name="nama" required />
+          <label for="editJenisKelamin">Jenis Kelamin:</label>
+          <select id="editJenisKelamin" name="jenis_kelamin" required>
+            <option value="L">Laki-laki</option>
+            <option value="P">Perempuan</option>
+          </select>
+          <label for="editTanggalLahir">Tanggal Lahir:</label>
+          <input type="date" id="editTanggalLahir" name="tanggal_lahir" required />
+          <label for="editNamaOrtu">Nama Orang Tua:</label>
+          <input type="text" id="editNamaOrtu" name="nama_ortu" required />
+          <label for="editAlamat">Alamat:</label>
+          <textarea id="editAlamat" name="alamat" required></textarea>
+          <label for="editEmail">Email:</label>
+          <input type="email" id="editEmail" name="email" required />
+          <label for="editNomorTlp">Nomor Telepon:</label>
+          <input type="text" id="editNomorTlp" name="nomor_tlp" required />
+          <label for="editKelas">Kelas:</label>
+          <input type="text" id="editKelas" name="kelas" required />
+          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </form>
       </div>
     </div>
+  </div>
+</div>
 
-    <script>
-      // Variabel global untuk menyimpan data siswa
-      var dataSiswa;
-      // Fungsi untuk mengambil data siswa dari server
-      function getData() {
-        $.ajax({
-          url: "https://informatikaunwaha.com/tugasapi/naufal/test.php",
-          method: "GET",
-          dataType: "json",
-          success: function (response) {
-            dataSiswa = response;
-            displayData(dataSiswa);
-          },
-          error: function (error) {
-            console.log(error);
-          },
-        });
-      }
-      // Fungsi untuk menampilkan data dalam tabel
-      function displayData(data) {
-        var siswaBody = $("#siswaBody");
+<script>
+  // Variabel global untuk menyimpan data siswa
+  var dataSiswa;
+  // Fungsi untuk mengambil data siswa dari server
+  function getData() {
+    $.ajax({
+      url: "https://informatikaunwaha.com/tugasapi/naufal/test.php",
+      method: "GET",
+      dataType: "json",
+      success: function (response) {
+        dataSiswa = response;
+        displayData(dataSiswa);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  }
+  // Fungsi untuk menampilkan data dalam tabel
+  function displayData(data) {
+    var siswaBody = $("#siswaBody");
 
-        siswaBody.empty();
+    siswaBody.empty();
 
-        data.forEach(function (siswa) {
-          var row = $(`<tr>
-                    <td>${siswa.id}</td>
+    var nom = 1;
+    data.forEach(function (siswa) {
+      var row = $(`<tr>
+                    <td>${nom++}</td>
                     <td>${siswa.nama}</td>
                     <td>${siswa.jenis_kelamin}</td>
                     <td>${siswa.tanggal_lahir}</td>
@@ -92,59 +97,78 @@
                     <td>${siswa.nomor_tlp}</td>
                     <td>${siswa.kelas}</td>
                     <td>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editSiswa(${siswa.id})">Edit</button>
-                        <button class="btn btn-danger" onclick="deleteSiswa(${siswa.id})" id="delete">Delete</button>
+                        <button class="btn btn-sm btn-outline-success me-1 border-0 p-1 px-2" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editSiswa(${siswa.id})"><i class='fas fa-edit'></i></button>
+                        <button class="btn btn-sm btn-outline-danger  border-0 p-1  px-2" onclick="deleteSiswa(${siswa.id})" id="delete"><i class='fas fa-times'></i></button>
                     </td>
                 </tr>`);
-          siswaBody.append(row);
-        });
-      }
-      // Fungsi untuk mengisi formulir edit dengan data siswa
-      function editSiswa(id) {
-        var siswa = dataSiswa.find((s) => s.id == id);
-        $("#editId").val(siswa.id);
-        $("#editNama").val(siswa.nama);
-        $("#editJenisKelamin").val(siswa.jenis_kelamin);
-        $("#editTanggalLahir").val(siswa.tanggal_lahir);
-        $("#editNamaOrtu").val(siswa.nama_ortu);
-        $("#editAlamat").val(siswa.alamat);
-        $("#editEmail").val(siswa.email);
-        $("#editNomorTlp").val(siswa.nomor_tlp);
-        $("#editKelas").val(siswa.kelas);
-      }
-      // Tangkap peristiwa formulir edit disubmit
-      $("#editForm").submit(function (event) {
-        event.preventDefault();
-        var formData = {
-          id: $("#editId").val(),
-          nama: $("#editNama").val(),
-          jenis_kelamin: $("#editJenisKelamin").val(),
-          tanggal_lahir: $("#editTanggalLahir").val(),
-          nama_ortu: $("#editNamaOrtu").val(),
-          alamat: $("#editAlamat").val(),
-          email: $("#editEmail").val(),
-          nomor_tlp: $("#editNomorTlp").val(),
-          kelas: $("#editKelas").val(),
-        };
-        var data = $("#editForm").serialize();
-        console.log(data);
-        var url = "https://informatikaunwaha.com/tugasapi/naufal/test.php"; // Ganti dengan URL endpoint Anda
-        // Data yang akan dikirim
-        $.ajax({
-          url: url,
-          type: "PUT",
-          contentType: "application/x-www-form-urlencoded",
-          data: data,
-          success: function (response) {
-            console.log(response);
-            // localStorage.setItem('lastPage', lastPage);
-            location.reload();
-            
+      siswaBody.append(row);
+    });
+    $("table").DataTable({
+      dom: "Bfltrip",
+      buttons: [
+        {
+          extend: "print",
+          text: "Cetak Data",
+          exportOptions: {
+            columns: [0, 1, 2, 3, 4, 5, 6,7,8],
           },
-        });
-      });
-      function deleteSiswa(id) {
-      if (confirm("Apakah Anda yakin ingin menghapus siswa ini?")) {
+        },
+        {
+          extend: "excel",
+          text: "Export Ke Excel",
+        },
+      ],
+      lengthMenu: [
+        [10, 25, 50, 100 - 1],
+        [10, 25, 50, 100, "All"],
+      ],
+    });
+  }
+  // Fungsi untuk mengisi formulir edit dengan data siswa
+  function editSiswa(id) {
+    var siswa = dataSiswa.find((s) => s.id == id);
+    $("#editId").val(siswa.id);
+    $("#editNama").val(siswa.nama);
+    $("#editJenisKelamin").val(siswa.jenis_kelamin);
+    $("#editTanggalLahir").val(siswa.tanggal_lahir);
+    $("#editNamaOrtu").val(siswa.nama_ortu);
+    $("#editAlamat").val(siswa.alamat);
+    $("#editEmail").val(siswa.email);
+    $("#editNomorTlp").val(siswa.nomor_tlp);
+    $("#editKelas").val(siswa.kelas);
+  }
+  // Tangkap peristiwa formulir edit disubmit
+  $("#editForm").submit(function (event) {
+    event.preventDefault();
+    var formData = {
+      id: $("#editId").val(),
+      nama: $("#editNama").val(),
+      jenis_kelamin: $("#editJenisKelamin").val(),
+      tanggal_lahir: $("#editTanggalLahir").val(),
+      nama_ortu: $("#editNamaOrtu").val(),
+      alamat: $("#editAlamat").val(),
+      email: $("#editEmail").val(),
+      nomor_tlp: $("#editNomorTlp").val(),
+      kelas: $("#editKelas").val(),
+    };
+    var data = $("#editForm").serialize();
+    console.log(data);
+    var url = "https://informatikaunwaha.com/tugasapi/naufal/test.php"; // Ganti dengan URL endpoint Anda
+    // Data yang akan dikirim
+    $.ajax({
+      url: url,
+      type: "PUT",
+      contentType: "application/x-www-form-urlencoded",
+      data: data,
+      success: function (response) {
+        console.log(response);
+        // localStorage.setItem('lastPage', lastPage);
+        location.reload();
+      },
+    });
+  });
+  function deleteSiswa(id) {
+    if (confirm("Apakah Anda yakin ingin menghapus siswa ini?")) {
       var url = "https://informatikaunwaha.com/tugasapi/naufal/test.php"; // Ganti dengan URL endpoint Anda
       var data = { id: id };
 
@@ -161,10 +185,10 @@
       });
     }
   }
-      // Panggil fungsi getData saat halaman dimuat
-      $(document).ready(function () {
-        getData();
-      });
-       localStorage.setItem('halaman','readdata.html');
-        halamanini=localStorage.getItem('halaman')
-    </script>
+  // Panggil fungsi getData saat halaman dimuat
+  $(document).ready(function () {
+    getData();
+  });
+  localStorage.setItem("halaman", "readdata.html");
+  halamanini = localStorage.getItem("halaman");
+</script>

@@ -1,167 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="assets/fontawesome/css/all.css">
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css" />
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" /> -->
-    <link rel="stylesheet" href="assets/DataTables/datatables.min.css">
-</head>
-<body id="gridArea">
+    <script src="assets/jquery-3.7.1.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="assets/DataTables/datatables.min.css" /> -->
+
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/fh-3.4.0/r-2.5.0/datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/customdt.css" />
+
     <style>
-        *{
-            text-decoration: none;
-            list-style-type: none;
-        }
-        body{
-            min-height: 100vh;
-            /* max-height: 200vh; */
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            grid-template-rows: 60px 1fr;
-            grid-template-areas: 
-            "side header"
-            "side main";
-            position: relative;
-        }
-        header{
-            background-color: #14213d;
-            color: #fca311;
-            padding: 10px;
-            grid-area: header;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-        .sidebar{
-            background-color: #0d1321;
-            grid-area: side;
-            color: #ffffff;
-        }
-        .sidebar .containerIcon{
-            height: 60px;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* border: 0.5px solid #fff; */ border-bottom: 2px solid rgba(255, 255, 255, 0.329);
+      * {
+        text-decoration: none;
+        list-style-type: none;
+      }
+      #gridArea {
+        min-height: 100vh;
+        /* max-height: 200vh; */
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 60px 1fr;
+        grid-template-areas:
+          "side header"
+          "side main";
+        position: relative;
+      }
+      header {
+        background-color: #14213d;
+        color: #fca311;
+        padding: 10px;
+        grid-area: header;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+      }
+      .sidebar {
+        background-color: #0d1321;
+        grid-area: side;
+        color: #ffffff;
+      }
+      .sidebar .containerIcon {
+        height: 60px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* border: 0.5px solid #fff; */
+        border-bottom: 2px solid rgba(255, 255, 255, 0.329);
+      }
+      .sidebar .containerIcon i {
+        color: #ffffff;
+      }
+      .sidebar .menu {
+        background-color: #0d1321;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .sidebar .menu a {
+        /* border-bottom: 2px solid rgba(255, 255, 255, 0.329); */
+        gap: 10px;
+        text-decoration-line: none;
+        color: #fff;
+        line-height: 40px;
+        font-size: 20px;
+        /* display: block; */
+      }
+      main {
+        background-color: #e5e5e5;
 
-        }
-        .sidebar .containerIcon i{
-            color: #ffffff;
-            
-        }
-        .sidebar .menu{
-            background-color: #0d1321;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            text-align: center;
-            margin-top: 20px;
-            
-        }
-        .sidebar .menu a{
-            /* border-bottom: 2px solid rgba(255, 255, 255, 0.329); */
-            gap: 10px;
-            text-decoration-line: none;
-            color:  #fff;
-            line-height: 40px;
-            font-size: 20px;
-            /* display: block; */
-        }
-        main{
-            background-color: #e5e5e5;
-            
-            overflow-y: auto; 
-            /* max-height: 100vh;  */
-        }
-        .mnsidebar .active{
-            background-color: #fca311;
-        }
-        .hideBtn{
-            display: none;
-        }
-        .hide{
-            display: none;
-        }
-        .btnplhActive{
-            /* height: 50px;
+        overflow-y: auto;
+        /* max-height: 100vh;  */
+      }
+      .mnsidebar .active {
+        background-color: #fca311;
+      }
+      .hideBtn {
+        display: none;
+      }
+      .hide {
+        display: none;
+      }
+      .btnplhActive {
+        /* height: 50px;
             width: 45px; */
-            scale: 1.5;
-        }
-        .active{
-            background-color: #e5e5e5;
-            color: #000 !important;
-            border-radius: 30px 0px 0px 30px;
-            margin-left: 30px;
-            box-shadow: inset 5px 5px 5px #00000050;
-        }
-        .menuPenilaian{
-            gap: 10px;
-        }
-
+        scale: 1.5;
+      }
+      .active {
+        background-color: #e5e5e5;
+        color: #000 !important;
+        border-radius: 30px 0px 0px 30px;
+        margin-left: 30px;
+        box-shadow: inset 5px 5px 5px #00000050;
+      }
+      .menuPenilaian {
+        gap: 10px;
+      }
     </style>
-    <header>
+  </head>
+
+  <body>
+    <main  id="gridArea">
+      <header>
         <h5>Sekolah</h5>
-        <i style="position: absolute;left: -50px;" class="fa-solid fa-x fa-2xl" onclick="toggleSidebar()" id="toggleSide"></i>
-        <div class="containerUserInfo" style="display: flex;align-items: center;gap: 10px;height: 60px;" id="loginbtn">
-            <!-- <div class="dropdown">
+        <i style="position: absolute; left: -50px" class="fa-solid fa-x fa-2xl" onclick="toggleSidebar()" id="toggleSide"></i>
+        <div class="containerUserInfo" style="display: flex; align-items: center; gap: 10px; height: 60px" id="loginbtn">
+          <!-- <div class="dropdown">
                 <p style="text-align: center;line-height: 60px;" data-bs-toggle="dropdown" aria-expanded="false">Nama Pengguna</p>
                 <ul id="gambarDropdown" class="dropdown-menu" aria-labelledby="gambarDropdown">
                     <li><a class="dropdown-item" href="#">Logout</a></li>
                 </ul>
             </div> -->
         </div>
-    </header>
-    <div class="sidebar" id="sidebar">
+      </header>
+      <div class="sidebar" id="sidebar">
         <div class="containerIcon">
-            <i class="fa-solid fa-graduation-cap fa-2xl" id="iconSide"></i>
-        </div>
-        
-        <div class="menu" id="menuSidebar">
-            <a href="javascript:void(0)" class="mnsidebar" id="registrasi" onclick="konten('registrasi.html','#registrasi')">Registrasi</a>
-            <a href="javascript:void(0)" class="mnsidebar" id="pembayaran" onclick="konten('pembayaran.html','#pembayaran')">Pembayaran</a>        
-            <div class="Penilaian">
-                <a href="" class="dropdown-toggle" class="mnsidebar" onclick="showMenu(event,'menuPenilaian')">Penilaian</a>
-                <div class="menuPenilaian" style="display: none;flex-direction: column;gap: 10px;padding-top: 10px;padding-bottom: 10px; background-color: #090d16;border-top:2px solid rgba(255, 255, 255, 0.329);" id="menuPenilaian">
-                    <a href="javascript:void(0)" id="nilai1" class="mnsidebar" onclick="konten('nilai/penilaian1.html','#nilai1')">Kelas 1</a>
-                    <a href="javascript:void(0)" id="nilai2" class="mnsidebar" onclick="konten('nilai/penilaian2.html','#nilai2')">Kelas 2</a>
-                    <a href="javascript:void(0)" id="nilai3" class="mnsidebar" onclick="konten('nilai/penilaian3.html','#nilai3')">Kelas 3</a>
-                </div>
-            </div>             
-            <div class="Jadwal">
-                <a href="" class="dropdown-toggle" class="mnsidebar" onclick="showMenu(event,'menuJadwal')">Jadwal</a>
-                <div class="menuJadwal" style="display: none;flex-direction: column;gap: 10px;padding-top: 10px;padding-bottom: 10px; background-color: #090d16;" id="menuJadwal">
-                    <a href="javascript:void(0)" class="mnsidebar" id="jadwal1" onclick="konten('jadwal/jadwal1.html','#jadwal1')">Jadwal kelas 1</a>
-                    <a href="javascript:void(0)" class="mnsidebar" id="jadwal2" onclick="konten('jadwal/jadwal2.html','#jadwal2')">Jadwal kelas 2</a>
-                    <a href="javascript:void(0)" class="mnsidebar" id="jadwal3" onclick="konten('jadwal/jadwal3.html','#jadwal3')">Jadwal kelas 3</a>
-                </div>
-            </div>
-            <a href="javascript:void(0)" class="mnsidebar" id="readdata" onclick="konten('readdata.html','#readdata')">Lihat Data</a>
+          <i class="fa-solid fa-graduation-cap fa-2xl" id="iconSide"></i>
         </div>
 
-    </div>
-    <main class="content" id="blokkonten">
-        
+        <div class="menu" id="menuSidebar">
+          <a href="javascript:void(0)" class="mnsidebar" id="registrasi" onclick="konten('registrasi.html','#registrasi')">Registrasi</a>
+          <a href="javascript:void(0)" class="mnsidebar" id="pembayaran" onclick="konten('pages/pembayaran/add_pembayaran.html','#pembayaran')">Tambah Pembayaran</a>
+          <div class="Penilaian">
+            <a href="" class="dropdown-toggle" class="mnsidebar" onclick="showMenu(event,'menuPenilaian')">Penilaian</a>
+            <div class="menuPenilaian" style="display: none; flex-direction: column; gap: 10px; padding-top: 10px; padding-bottom: 10px; background-color: #090d16; border-top: 2px solid rgba(255, 255, 255, 0.329)" id="menuPenilaian">
+              <a href="javascript:void(0)" id="nilai1" class="mnsidebar" onclick="konten('nilai/penilaian1.html','#nilai1')">Kelas 1</a>
+              <a href="javascript:void(0)" id="nilai2" class="mnsidebar" onclick="konten('nilai/penilaian2.html','#nilai2')">Kelas 2</a>
+              <a href="javascript:void(0)" id="nilai3" class="mnsidebar" onclick="konten('nilai/penilaian3.html','#nilai3')">Kelas 3</a>
+            </div>
+          </div>
+          <div class="Jadwal">
+            <a href="" class="dropdown-toggle" class="mnsidebar" onclick="showMenu(event,'menuJadwal')">Jadwal</a>
+            <div class="menuJadwal" style="display: none; flex-direction: column; gap: 10px; padding-top: 10px; padding-bottom: 10px; background-color: #090d16" id="menuJadwal">
+              <a href="javascript:void(0)" class="mnsidebar" id="jadwal1" onclick="konten('jadwal/jadwal1.html','#jadwal1')">Jadwal kelas 1</a>
+              <a href="javascript:void(0)" class="mnsidebar" id="jadwal2" onclick="konten('jadwal/jadwal2.html','#jadwal2')">Jadwal kelas 2</a>
+              <a href="javascript:void(0)" class="mnsidebar" id="jadwal3" onclick="konten('jadwal/jadwal3.html','#jadwal3')">Jadwal kelas 3</a>
+            </div>
+          </div>
+          <a href="javascript:void(0)" class="mnsidebar" id="readdata" onclick="konten('readdata.html','#readdata')">Lihat Data</a>
+        </div>
+      </div>
+
+      <main class="content" id="blokkonten"></main>
     </main>
-    
     <script src="assets/jquery-3.7.1.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/fontawesome/js/all.js"></script>
-    <script src="assets/DataTables/datatables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<script>
-    var halamanini = '';
-    ceklogin();
-    function ceklogin(){
-    if(localStorage.getItem("loginInfo")){
-        let loginInfoString = localStorage.getItem('loginInfo');
-        let loginInfo = JSON.parse(loginInfoString);
-        // console.log(loginInfo.nama)
-        let pppp = '<a href="javascript:void(0)" class="mnsidebar" id="registrasi" onclick="konten(\'registrasi.html\',\'#registrasi\')">Registrasi</a>\
+    <!-- <script src="assets/DataTables/datatables.min.js"></script>
+    
+    -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/fh-3.4.0/r-2.5.0/datatables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <script>
+      var halamanini = "";
+      ceklogin();
+      function ceklogin() {
+        if (localStorage.getItem("loginInfo")) {
+          let loginInfoString = localStorage.getItem("loginInfo");
+          let loginInfo = JSON.parse(loginInfoString);
+          // console.log(loginInfo.nama)
+          let pppp =
+            '<a href="javascript:void(0)" class="mnsidebar" id="registrasi" onclick="konten(\'registrasi.html\',\'#registrasi\')">Registrasi</a>\
+            <a href="javascript:void(0)" class="mnsidebar" id="pembayaran" onclick="konten(\'pembayaran/pembayaran.html\',\'#pembayaran\')">Pembayaran Registrasi</a>\
             <a href="javascript:void(0)" class="mnsidebar" id="addpembayaran" onclick="konten(\'pembayaran/add_pembayaran.html\',\'#addpembayaran\')">Tambah Pembayaran</a>\
             <a a href = "javascript:void(0)" class="mnsidebar" id="datapembayaran" onclick = "konten(\'pembayaran/data_pembayaran.html\',\'#datapembayaran\')" >data Pembayaran</a>\
             <div class="Penilaian">\
@@ -181,131 +193,122 @@
                 </div>\
             </div>\
             <a href="javascript:void(0)" class="mnsidebar" id="readdata" onclick="konten(\'readdata.html\',\'#readdata\')">Data Regristrasi</a>';
-            let menuSidebar = document.getElementById("menuSidebar").innerHTML = pppp;
-            let ppp = '<div class="containerUserInfo" style="display: flex;align-items: center;gap: 10px;height: 60px;" id="loginbtn">\
+          let menuSidebar = (document.getElementById("menuSidebar").innerHTML = pppp);
+          let ppp =
+            '<div class="containerUserInfo" style="display: flex;align-items: center;gap: 10px;height: 60px;" id="loginbtn">\
             <div div class="dropdown" >\
-                <p style="text-align: center;line-height: 60px;" data-bs-toggle="dropdown" aria-expanded="false" id="namauser">'+ loginInfo.nama+'</p>\
+                <p style="text-align: center;line-height: 60px;" data-bs-toggle="dropdown" aria-expanded="false" id="namauser">' +
+            loginInfo.nama +
+            '</p>\
                 <ul id="gambarDropdown" class="dropdown-menu" aria-labelledby="gambarDropdown">\
                     <li><a class="dropdown-item" onclick="logout()" href="javascript:void(0)">Logout</a></li>\
                 </ul>\
             </div>\
-        </div > '
-        let loginbtn = document.getElementById("loginbtn").innerHTML = ppp;
-        }else{
-            konten('registrasi.html', '#registrasi');
-            let ppp = '<p style="text-align: center;line-height: 60px;"  onclick="konten(\'login.html\')">LOGIN</p>'
-            let pppp = '<a href="javascript:void(0)" class="mnsidebar" id="registrasi" onclick="konten(\'registrasi.html\',\'#registrasi\')">Registrasi</a>\
-            <a a href = "javascript:void(0)" class="mnsidebar" id="datapembayaran" onclick = "konten(\'pages/pembayaran/data_pembayaran.html\',\'#datapembayaran\')" > Pembayaran</a>'
-            let menuSidebar = document.getElementById("menuSidebar").innerHTML = pppp;
-            let loginbtn = document.getElementById("loginbtn").innerHTML = ppp;
-    }}
-    
-    if (localStorage.getItem('halamanakhir')) {
-            let halamaniniString = localStorage.getItem('halamanakhir');
-            let halamanini = JSON.parse(halamaniniString);
-            konten(halamanini.halaman, halamanini.id)
+        </div > ';
+          let loginbtn = (document.getElementById("loginbtn").innerHTML = ppp);
         } else {
-            let halamanakhir = { halaman: "registrasi.html", id: "registrasi" };
-            let halamanakhirString = JSON.stringify(halamanakhir);
-            localStorage.setItem('halamanakhir', halamanakhirString);
-            let halamaniniString = localStorage.getItem('halamanakhir');
-            let halamanini = JSON.parse(halamaniniString);
-            konten(halamanini.halaman, halamanini.id)
+          konten("registrasi.html", "#registrasi");
+          let ppp = '<p style="text-align: center;line-height: 60px;"  onclick="konten(\'login.html\')">LOGIN</p>';
+          let pppp =
+            '<a href="javascript:void(0)" class="mnsidebar" id="registrasi" onclick="konten(\'registrasi.html\',\'#registrasi\')">Registrasi</a>\
+            <a a href = "javascript:void(0)" class="mnsidebar" id="datapembayaran" onclick = "konten(\'pembayaran/pembayaran.html\',\'#datapembayaran\')" > Pembayaran</a>';
+          let menuSidebar = (document.getElementById("menuSidebar").innerHTML = pppp);
+          let loginbtn = (document.getElementById("loginbtn").innerHTML = ppp);
         }
-   function login() {
+      }
+
+      if (localStorage.getItem("halamanakhir")) {
+        let halamaniniString = localStorage.getItem("halamanakhir");
+        let halamanini = JSON.parse(halamaniniString);
+        konten(halamanini.halaman, halamanini.id);
+      } else {
+        let halamanakhir = { halaman: "registrasi.html", id: "registrasi" };
+        let halamanakhirString = JSON.stringify(halamanakhir);
+        localStorage.setItem("halamanakhir", halamanakhirString);
+        let halamaniniString = localStorage.getItem("halamanakhir");
+        let halamanini = JSON.parse(halamaniniString);
+        konten(halamanini.halaman, halamanini.id);
+      }
+      function login() {
         let namalogin = document.getElementById("namalogin").value;
         let passlogin = document.getElementById("passlogin").value;
         let url = "https://informatikaunwaha.com/tugasapi/sekolah/apisekolah/apiguru.php/";
 
         $.getJSON(url, { fungsi: "READ" }, function (result) {
-            let authenticatedUser = result.find(
-                kolom => kolom.nama.toLowerCase() === namalogin.toLowerCase() && passlogin === kolom.kodeGuru
-            );
+          let authenticatedUser = result.find((kolom) => kolom.nama.toLowerCase() === namalogin.toLowerCase() && passlogin === kolom.kodeGuru);
 
-            if (authenticatedUser) {
-                // Create a data object for the authenticated user
-                let datalogin = {
-                    nama: authenticatedUser.nama,
-                    kodeGuru: authenticatedUser.kodeGuru,
-                    mapel: authenticatedUser.mataPelajaran
-                };
-                let dataloginjson = JSON.stringify(datalogin);
-                localStorage.setItem("loginInfo",dataloginjson)
+          if (authenticatedUser) {
+            // Create a data object for the authenticated user
+            let datalogin = {
+              nama: authenticatedUser.nama,
+              kodeGuru: authenticatedUser.kodeGuru,
+              mapel: authenticatedUser.mataPelajaran,
+            };
+            let dataloginjson = JSON.stringify(datalogin);
+            localStorage.setItem("loginInfo", dataloginjson);
 
-                // Successful login
-                alert("welcome "+datalogin.kodeGuru);
-                ceklogin();
-                konten('registrasi.html','#registrasi');
-            } else {
-                // Failed login
-                alert('Invalid username or password');
-            }
+            // Successful login
+            alert("welcome " + datalogin.kodeGuru);
+            ceklogin();
+            konten("registrasi.html", "#registrasi");
+          } else {
+            // Failed login
+            alert("Invalid username or password");
+          }
         });
-    }
-    
-    function logout(){
-        localStorage.removeItem("loginInfo")
-        ceklogin();
-        konten('registrasi.html','#registrasi');
+      }
 
-    }
-    function konten(namafile,id){
-        let halamanakhir = {halaman: namafile ,id: id};
+      function logout() {
+        localStorage.removeItem("loginInfo");
+        ceklogin();
+        konten("registrasi.html", "#registrasi");
+      }
+      function konten(namafile, id) {
+        let halamanakhir = { halaman: namafile, id: id };
         let halamanakhirString = JSON.stringify(halamanakhir);
-        localStorage.setItem('halamanakhir', halamanakhirString);
-        let halamaniniString = localStorage.getItem('halamanakhir');
+        localStorage.setItem("halamanakhir", halamanakhirString);
+        let halamaniniString = localStorage.getItem("halamanakhir");
         let halamanini = JSON.parse(halamaniniString);
 
         $("#blokkonten").load(namafile);
-        $("#registrasi").removeClass('active')
-        $("#datapembayaran").removeClass('active')
-        $("#addpembayaran").removeClass('active')
-        $("#readdata").removeClass('active')
-        $("#nilai1").removeClass('active')
-        $("#nilai2").removeClass('active')
-        $("#nilai3").removeClass('active')
-        $("#jadwal1").removeClass('active')
-        $("#jadwal2").removeClass('active')
-        $("#jadwal3").removeClass('active')
-        $(id).addClass('active')
-    }
-    function toggleSidebar() {
+        $(".mnsidebar").removeClass("active");
+
+        $(id).addClass("active");
+      }
+      function toggleSidebar() {
         if ($("#toggleSide").hasClass("fa-bars")) {
-            $("#gridArea").css("grid-template-columns", "300px 1fr");
-            $("#gridArea").css("grid-template-rows", "60px 1fr");
-            $("#gridArea").css("grid-template-areas", "side header","side main");
-            $("#toggleSide").css("left", "-50px");
-            $("#toggleSide").removeClass("fa-bars").addClass("fa-x");
+          $("#gridArea").css("grid-template-columns", "300px 1fr");
+          $("#gridArea").css("grid-template-rows", "60px 1fr");
+          $("#gridArea").css("grid-template-areas", "side header", "side main");
+          $("#toggleSide").css("left", "-50px");
+          $("#toggleSide").removeClass("fa-bars").addClass("fa-x");
         } else {
-            $("#gridArea").css("grid-template-columns", "0 1fr");
-            $("#gridArea").css("grid-template-rows", "60px 1fr");
-            $("#gridArea").css("grid-template-areas", "header header","main main");
-            $("#toggleSide").css("left", "250px");
-            $("#toggleSide").removeClass("fa-x").addClass("fa-bars");
+          $("#gridArea").css("grid-template-columns", "0 1fr");
+          $("#gridArea").css("grid-template-rows", "60px 1fr");
+          $("#gridArea").css("grid-template-areas", "header header", "main main");
+          $("#toggleSide").css("left", "250px");
+          $("#toggleSide").removeClass("fa-x").addClass("fa-bars");
         }
-    }
-    
+      }
 
-    function showMenu(event, menuId) {
-            event.preventDefault();
+      function showMenu(event, menuId) {
+        event.preventDefault();
 
-            // Assuming menuId is the ID of the menu you want to toggle
-            let menu = document.getElementById(menuId);
+        // Assuming menuId is the ID of the menu you want to toggle
+        let menu = document.getElementById(menuId);
 
-            if (menu) {
-                let displayStyle = window.getComputedStyle(menu).display;
+        if (menu) {
+          let displayStyle = window.getComputedStyle(menu).display;
 
-                if (displayStyle === "flex") {
-                    menu.style.display = "none";
-                } else {
-                    menu.style.display = "flex";
-                }
-            } else {
-                console.error("Menu element not found or not defined.");
-            }
+          if (displayStyle === "flex") {
+            menu.style.display = "none";
+          } else {
+            menu.style.display = "flex";
+          }
+        } else {
+          console.error("Menu element not found or not defined.");
         }
-
-    
-</script>
-</body>
+      }
+    </script>
+  </body>
 </html>

@@ -1,126 +1,124 @@
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
 
-    .container {
-        max-width: 1000px;
-        margin: 0 auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
 
-    h1 {
-        font-family: 'Playfair Display', serif;
-        text-align: center;
-    }
+  h1 {
+    font-family: "Playfair Display", serif;
+    text-align: center;
+  }
 
-    label,
-    input,
-    select,
-    textarea {
-        display: block;
-        margin-bottom: 5px;
-    }
+  label,
+  input,
+  select,
+  textarea {
+    display: block;
+    margin-bottom: 5px;
+  }
 
-    label {
-        display: block;
-    }
+  label {
+    display: block;
+  }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea {
-        width: 100%;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
-    select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
 
-    input[type="radio"] {
-        margin-right: 15px;
-        margin-top: 8px;
-    }
+  input[type="radio"] {
+    margin-right: 15px;
+    margin-top: 8px;
+  }
 
-    button {
-        background: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+  button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-    button:hover {
-        background: #0056b3;
-    }
+  button:hover {
+    background: #0056b3;
+  }
 </style>
 
 <div class="container">
-    <h1>Formulir Pendaftaran Siswa Baru</h1>
-    <form id="registrationForm" action="" method="post">
-        <label for="nama">Nama Lengkap:</label>
-        <input type="text" class="form-control" name="nama" id="nama" required />
-        <div class="d-flex my-3 align-items center">
-            <label>Jenis Kelamin:</label>
+  <h1>Formulir Pendaftaran Siswa Baru</h1>
+  <form id="registrationForm" action="" method="post">
+    <label for="nama">Nama Lengkap:</label>
+    <input type="text" class="form-control" name="nama" id="nama" required />
+    <div class="d-flex my-3 align-items center">
+      <label>Jenis Kelamin:</label>
 
-            <div class="ms-3 btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                <input type="radio" class="btn-check" value="L" name="jenis_kelamin" id="btncheck1"
-                    autocomplete="off" />
-                <label class="btn btn-outline-primary" for="btncheck1">Laki-laki</label>
+      <div class="ms-3 btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="radio" class="btn-check" value="L" name="jenis_kelamin" id="btncheck1" autocomplete="off" />
+        <label class="btn btn-outline-primary" for="btncheck1">Laki-laki</label>
 
-                <input type="radio" class="btn-check" value="P" name="jenis_kelamin" id="btncheck3"
-                    autocomplete="off" />
-                <label class="btn btn-outline-primary" for="btncheck3">Perempuan</label>
-            </div>
-        </div>
+        <input type="radio" class="btn-check" value="P" name="jenis_kelamin" id="btncheck3" autocomplete="off" />
+        <label class="btn btn-outline-primary" for="btncheck3">Perempuan</label>
+      </div>
+    </div>
 
-        <div class="mb-3">
-            <label for="tanggal_lahir">Tanggal Lahir:</label>
-            <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required />
-        </div>
+    <div class="mb-3">
+      <label for="tanggal_lahir">Tanggal Lahir:</label>
+      <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required />
+    </div>
 
-        <div class="mb-3">
-            <label for="nama_orang_tua">Nama Orang Tua:</label>
-            <input type="text" class="form-control" name="nama_orang_tua" id="nama_orang_tua" required />
-        </div>
+    <div class="mb-3">
+      <label for="nama_orang_tua">Nama Orang Tua:</label>
+      <input type="text" class="form-control" name="nama_orang_tua" id="nama_orang_tua" required />
+    </div>
 
-        <div class="mb-3">
-            <label for="alamat">Alamat:</label>
-            <textarea name="alamat" id="alamat" rows="4" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="email">Alamat Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required />
-        </div>
-        <div class="mb-3">
-            <label for="no_telepon">Nomor Telepon:</label>
-            <input type="tel" class="form-control" name="no_telepon" id="no_telepon" required />
-        </div>
-        <div class="mb-3">
-            <label for="kelas">Kelas yang Didaftar:</label>
-            <select name="kelas" required>
-                <option value="I">Kelas I</option>
-                <option value="II">Kelas II</option>
-                <option value="III">Kelas III</option>
-            </select>
-        </div>
+    <div class="mb-3">
+      <label for="alamat">Alamat:</label>
+      <textarea name="alamat" id="alamat" rows="4" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="email">Alamat Email:</label>
+      <input type="email" class="form-control" id="email" name="email" required />
+    </div>
+    <div class="mb-3">
+      <label for="no_telepon">Nomor Telepon:</label>
+      <input type="tel" class="form-control" name="no_telepon" id="no_telepon" required />
+    </div>
+    <div class="mb-3">
+      <label for="kelas">Kelas yang Didaftar:</label>
+      <select name="kelas" required>
+        <option value="I">Kelas I</option>
+        <option value="II">Kelas II</option>
+        <option value="III">Kelas III</option>
+      </select>
+    </div>
 
-        <button type="button" id="checkAge">Daftar</button>
-    </form>
+    <button type="button" id="checkAge">Daftar</button>
+  </form>
 </div>
 
 <script src="assets/s.js"></script>

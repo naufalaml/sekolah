@@ -1,0 +1,36 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="my-3 mb-4">Pembayaran Registrasi</h4>
+      <div class="mb-3">
+        <label for="" class="form-label">Kode Registrasi</label>
+        <input type="text" id="koderegis" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label for="" class="form-label">Jumlah Bayar</label>
+        <input type="number" name="" value="1000000" id="jumlah" class="form-control" placeholder="" aria-describedby="helpId" />
+      </div>
+
+      <div class="mb-3">
+        <button onclick="bayar()" class="btn btn-primary">Simpan Pembayaran</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function bayar() {
+    $.ajax({
+      type: "GET",
+      url: "https://informatikaunwaha.com/tugasapi/holis/api_update.php",
+      data: {
+        query: "UPDATE siswa SET status=1 WHERE koderegister LIKE '" + $("#koderegis").val() + "'",
+      },
+      dataType: "json",
+      success: function (response) {
+        alert("Pembayaran Terkonfirmasi !");
+      },
+    });
+  }
+</script>

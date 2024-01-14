@@ -12,7 +12,6 @@
         <label for="" class="form-label">Jenis Pembayaran</label>
         <select class="form-control form-select" name="" id="jenis">
           <option value="">Pilih Jenis Pembayaran</option>
-          <option value="Registrasi">Registrasi</option>
           <option value="SPP Bulanan">SPP Bulanan</option>
           <option value="Lain-lain">Lain-lain</option>
         </select>
@@ -44,10 +43,16 @@
       var datasiswa = response;
 
       $.each(datasiswa, function (indx, vale) {
-        $(`#nis`).append(`
-                 <option value="${vale.nisn}">${vale.nisn} - ${vale.nama}</option>
+        if(vale.status==0){
+          $(`#nis`).append(`
+          <option disabled value="${vale.nisn}">${vale.nisn} - ${vale.nama}</option>
+          `);
+        }else{
 
-                 `);
+          $(`#nis`).append(`
+          <option value="${vale.nisn}">${vale.nisn} - ${vale.nama}</option>
+          `);
+        }
       });
     },
   });
