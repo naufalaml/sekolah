@@ -81,18 +81,20 @@
         <br />
         <p>Tunjukkan bukti lembar Registrasi ini kepada staff administrasi (KTU) Sekolah</p>
 
-        <hr />
-        <h5>Kode Registrasi :</h5>
-        <h4 id="kodereg"></h4>
+        <div class="card border-0" id="pdfthis">
+          <h4>Tanda Bukti Registrasi</h4>
+          <hr />
+          <h5>Kode Registrasi :</h5>
+          <h4 id="kodereg"></h4>
+          <p id="dataregis"></p>
+          <h6>Nominal Pembayaran Registrasi : Rp.1.500.000</h6>
+        </div>
         <strong class="text-danger">Data anda akan hilang! pastikan untuk menyimpan kode registrasi pembayaran terlebih dahulu!!</strong>
-        
-        <p id="dataregis"></p>
-
-        <br />
-        <h6>Nominal Pembayaran Registrasi : Rp.1.500.000</h6>
       </div>
       <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Tutup</button>
         <button type="button" onclick="direk()" data-bs-dismiss="modal" class="btn btn-primary">Baik</button>
+        <button type="button" onclick="cetak()" class="btn btn-success">Cetak</button>
       </div>
     </div>
   </div>
@@ -124,3 +126,17 @@
   <button id="kirimHasilTes" onclick="kirim()" class="btn btn-primary" disabled>Kirim Hasil Tes</button>
 </div>
 <script src="assets/tes.js"></script>
+<script>
+  function cetak() {
+    var element = document.getElementById("pdfthis");
+    var opt = {
+      margin: 0.5,
+      filename: "tandabuktiregristrasi.pdf",
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 1.7 },
+
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+    html2pdf(element, opt);
+  }
+</script>
